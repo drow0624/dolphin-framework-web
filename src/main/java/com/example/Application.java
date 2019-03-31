@@ -19,7 +19,7 @@ public class Application {
     @Profile("dev")
     public Runnable createRunnable(Environment env) {
         return () -> {
-            System.out.println("spring boot is kafka running ip " + env.getProperty("kafka.url"));
+            System.out.println("spring boot is kafka running ip :" + env.getProperty("kafka.url"));
         };
     }
 
