@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 设置延迟加载-->
+    <settings>
+        <!-- 打开延迟加载的开关 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 将积极加载改为消息加载即按需加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--lazyLoadTriggerMethods默认情况下仅仅支持自动将equals,clone,hashCode,toString这几个方法定义为延迟加载的加载触发方法。-->
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode"/>
+    </settings>
+
+    <typeHandlers>
+
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.LocalDateTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.LocalTimeTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.OffsetDateTimeTypeHandler" />
+        <typeHandler handler="org.apache.ibatis.type.OffsetTimeTypeHandler" />
+        <!--<typeHandler handler="org.apache.ibatis.type.ZonedDateTimeTypeHandler" />-->
+        <!--<typeHandler handler="org.apache.ibatis.type.YearTypeHandler" />-->
+        <!--<typeHandler handler="org.apache.ibatis.type.MonthTypeHandler" />-->
+        <!--<typeHandler handler="org.apache.ibatis.type.YearMonthTypeHandler" />-->
+        <!--<typeHandler handler="org.apache.ibatis.type.JapaneseDateTypeHandler" />-->
+    </typeHandlers>
+</configuration>

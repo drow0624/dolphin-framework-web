@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="spring.ioc" />
         <module name="springboot" />
-        <module name="translator.service" />
-        <module name="uirb" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="translator.service" target="1.8" />
+      <module name="uirb" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
