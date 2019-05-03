@@ -33,6 +33,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void addEx(Article article) {
+//        DataSourceUtils.
         articleMapper.add(article);
         if(article!=null){
             throw new RuntimeException("Exception！");

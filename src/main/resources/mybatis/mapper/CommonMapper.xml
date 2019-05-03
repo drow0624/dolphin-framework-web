@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CommonMapper">
+
+    <select id="select" resultType="java.util.Map">
+        SELECT * FROM ${filter.table.name}
+        WHERE 1=1
+        <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>
+    </select>
+
+    <update id="update">
+        update ${updater.tableName}
+        set
+        <foreach collection="updater.fields" item="field" separator=",">
+            ${field.name} = #{field.value}
+        </foreach>
+        WHERE 1=1
+        <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>
+    </update>
+
+    <insert id="insert" parameterType="com.example.mapper.domain.DBRow" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        insert into ${tableName}
+        <foreach collection="fields" item="fieldName" open="(" separator="," close=")">
+            ${fieldName}
+        </foreach>
+        values
+        <foreach collection="values" item="value" open="(" separator="," close=")">
+            #{value}
+        </foreach>
+    </insert>
+
+    <insert id="insertRows" parameterType="list" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into ${list.get(0).tableName}
+        <foreach collection="list.get(0).fields" item="fieldName" open="(" separator="," close=")">
+            ${fieldName}
+        </foreach>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <foreach collection="item.values" item="value" open="(" separator="," close=")">
+                #{value}
+            </foreach>
+        </foreach>
+    </insert>
+
+
+    <select id="delete" parameterType="com.example.mapper.condition.QueryFilter">
+        DELETE FROM ${filter.table.tableName}
+        WHERE 1=1
+        <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>
+    </select>
+
+    <select id="count" parameterType="com.example.mapper.condition.QueryFilter" resultType="java.lang.Long">
+        SELECT count(1) FROM ${filter.table.tableName}
+        WHERE 1=1
+        <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>
+    </select>
+
+</mapper>
