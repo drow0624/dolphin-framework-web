@@ -63,7 +63,7 @@ public class DateTimeUtil {
         return Date.from(instant);
     }
 
-    public static Date nowDate(){
+    public static Date dateNow(){
         Instant instant = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
         return Date.from(instant);
     }

@@ -1,7 +1,5 @@
-package com.example.function;
+package com.example.stream;
 
-import java.io.File;
-import java.nio.file.Path;
 import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -47,6 +45,8 @@ public class Streams {
         final Collection< Task > tasks = Arrays.asList(
                 new Task( Status.OPEN, 5 ),
                 new Task( Status.OPEN, 13 ),
+                new Task( Status.OPEN, 12),
+                new Task( Status.CLOSED, 3),
                 new Task( Status.CLOSED, 8 )
         );
 
@@ -57,6 +57,7 @@ public class Streams {
                 .sum();
 
         Stream<Task> taskStream = tasks.stream().filter(task -> task.getStatus() == Status.OPEN);
+        //收集INT类型Stream
         IntStream intStream = taskStream.mapToInt(Task::getPoints);
         int sum = intStream.sum();
 
