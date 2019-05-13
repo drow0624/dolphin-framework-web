@@ -195,12 +195,12 @@ public class ElasticSearchUtil {
     /**
      * 索引文档
      *
-     * @param index    索引
-     * @param type     类型
-     * @param json     JSON文档，key-属性名，value-属性类型
+     * @param index 索引
+     * @param type  类型
+     * @param json  JSON文档，key-属性名，value-属性类型
      * @return boolean
      */
-    public static boolean createDocument(TransportClient client, String index, String type, String id,String json){
+    public static boolean createDocument(TransportClient client, String index, String type, String id, String json) {
 
         IndexRequestBuilder ib;
         if (id != null && !id.trim().isEmpty()) {
@@ -219,16 +219,20 @@ public class ElasticSearchUtil {
 //        }
 //        builder.endObject(); // end
 //        ib.setSource(builder);
-        ib.setSource(json,XContentType.JSON);
+        ib.setSource(json, XContentType.JSON);
         IndexResponse indexResponse = ib.get();
         return indexResponse.forcedRefresh();
     }
 
 
-    public static <T> boolean createDocument(TransportClient client,String id,T t){
+    public static <T> boolean createDocument(TransportClient client, String id, T t) {
         ESIndexDefinition indexDefinition = ESMappingBuilder.esIndexDefinition(t.getClass());
-        return createDocument(client,indexDefinition.getIndexName(),indexDefinition.getType(),"",JSON.toJSONString(t));
+        if (indexDefinition == null) {
+            return false;
+        }
+        return createDocument(client, indexDefinition.getIndexName(), indexDefinition.getType(), "", JSON.toJSONString(t));
     }
+
     /**
      * 创建分词器
      *
@@ -330,13 +334,14 @@ public class ElasticSearchUtil {
     }
 
     /**
-     *         if (mapping instanceof String) {
-     *             requestBuilder.setSource(String.valueOf(mapping), XContentType.JSON);
-     *         } else if (mapping instanceof Map) {
-     *             requestBuilder.setSource((Map)mapping);
-     *         } else if (mapping instanceof XContentBuilder) {
-     *             requestBuilder.setSource((XContentBuilder)mapping);
-     *         }
+     * if (mapping instanceof String) {
+     * requestBuilder.setSource(String.valueOf(mapping), XContentType.JSON);
+     * } else if (mapping instanceof Map) {
+     * requestBuilder.setSource((Map)mapping);
+     * } else if (mapping instanceof XContentBuilder) {
+     * requestBuilder.setSource((XContentBuilder)mapping);
+     * }
+     *
      * @param client
      * @param clazz
      * @return
@@ -344,14 +349,17 @@ public class ElasticSearchUtil {
      */
     public static boolean createMapping(TransportClient client, Class<?> clazz) throws IOException {
         ESIndexDefinition indexDefinition = ESMappingBuilder.esIndexDefinition(clazz);
+        if (indexDefinition == null) {
+            return false;
+        }
         List<ESMappingDefinition> esFieldDefinitions = ESMappingBuilder.esFieldDefinitions(clazz);
         String index = indexDefinition.getIndexName();
         String type = indexDefinition.getType();
         if (!isExistsIndex(client, index)) {
-            log.info(String.format("索引：%s 已存在",index));
+            log.info(String.format("索引：%s 已存在", index));
 //            createIndex(client, index, null);
             return false;
-        }else{
+        } else {
             Map<String, Object> existsMappings = obtainMapping(client, index, type);
             if (existsMappings != null) {
                 Set<String> existProps = existsMappings.keySet();
@@ -360,7 +368,7 @@ public class ElasticSearchUtil {
             }
         }
         if (esFieldDefinitions != null && !esFieldDefinitions.isEmpty()) {
-            log.info(String.format("索引：%s,类型：%s,映射新增属性:%s",index,type,JSON.toJSON(esFieldDefinitions)));
+            log.info(String.format("索引：%s,类型：%s,映射新增属性:%s", index, type, JSON.toJSON(esFieldDefinitions)));
             XContentBuilder builder = XContentFactory.jsonBuilder();
             builder.startObject()// start, start type, start properties
                     .startObject(type)
@@ -368,7 +376,7 @@ public class ElasticSearchUtil {
             for (ESMappingDefinition esFieldDefinition : esFieldDefinitions) {
                 builder.startObject(esFieldDefinition.getFieldName());
                 builder.field(ESMappingBuilder.FIELD_TYPE, ESMappingBuilder.fieldType(esFieldDefinition).toString().toLowerCase());
-                addFieldMappingParameters(builder,esFieldDefinition);
+                ESMappingBuilder.addFieldMappingParameters(builder, esFieldDefinition);
                 builder.endObject();
             }
             builder.endObject()
@@ -381,44 +389,7 @@ public class ElasticSearchUtil {
         return true;
     }
 
-    /**
-     * 添加映射属性
-     * @param builder
-     * @param esFieldDefinition
-     * @throws IOException
-     */
-    public static void addFieldMappingParameters(XContentBuilder builder, ESMappingDefinition esFieldDefinition) throws IOException {
 
-        boolean index = esFieldDefinition.isIndex();
-        boolean store = esFieldDefinition.isStore();
-        FieldType type = esFieldDefinition.getType();
-        DateFormat dateFormat = esFieldDefinition.getDateFormat();
-        String analyzer = esFieldDefinition.getAnalyzer();
-        String searchAnalyzer = esFieldDefinition.getSearchAnalyzer();
-        String normalizer = esFieldDefinition.getNormalizer();
-        if (store) {
-            builder.field(ESMappingBuilder.FIELD_STORE, store);
-        }
-
-        if (type != FieldType.Auto) {
-            builder.field(ESMappingBuilder.FIELD_TYPE, type.name().toLowerCase());
-            if (type == FieldType.Date && dateFormat != DateFormat.none) {
-                builder.field(ESMappingBuilder.FIELD_FORMAT,dateFormat.toString());
-            }
-        }
-        if (!index) {
-            builder.field(ESMappingBuilder.FIELD_INDEX, index);
-        }
-        if (!ESMappingBuilder.isEmpty(analyzer)) {
-            builder.field(ESMappingBuilder.FIELD_INDEX_ANALYZER, analyzer);
-        }
-        if (!ESMappingBuilder.isEmpty(searchAnalyzer)) {
-            builder.field(ESMappingBuilder.FIELD_SEARCH_ANALYZER, searchAnalyzer);
-        }
-        if (!ESMappingBuilder.isEmpty(normalizer)) {
-            builder.field(ESMappingBuilder.FIELD_NORMALIZER, normalizer);
-        }
-    }
 
     /**
      * 关闭索引
@@ -440,13 +411,14 @@ public class ElasticSearchUtil {
      * @param index
      * @return
      */
-    public static boolean openIndex(TransportClient client,String index) {
+    public static boolean openIndex(TransportClient client, String index) {
         IndicesAdminClient indicesAdminClient = client.admin()
                 .indices();
         OpenIndexResponse response = indicesAdminClient.prepareOpen(index)
                 .get();
         return response.isAcknowledged();
     }
+
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
 //        初始化客户端
         TransportClient client = client();
@@ -476,16 +448,13 @@ public class ElasticSearchUtil {
 //        log.info(JSON.toJSONString(documentForPage(client, "text_index", "tweet", 0, 100)));
 //        创建映射
         boolean isSuccess = createMapping(client, DataAccessLog.class);
-        System.out.println("修改映射："+isSuccess);
+        System.out.println("修改映射：" + isSuccess);
 
         isSuccess = createMapping(client, MonitorLog.class);
-        System.out.println("修改映射："+isSuccess);
+        System.out.println("修改映射：" + isSuccess);
 
         isSuccess = createMapping(client, SystemLog.class);
-        System.out.println("修改映射："+isSuccess);
-
-
-
+        System.out.println("修改映射：" + isSuccess);
 
 
 //        获取映射

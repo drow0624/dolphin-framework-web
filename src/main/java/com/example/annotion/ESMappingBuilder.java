@@ -2,7 +2,9 @@ package com.example.annotion;
 
 import com.example.entity.Article;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.common.xcontent.XContentBuilder;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -65,6 +67,46 @@ public class ESMappingBuilder {
                     .build();
         }
         return esIndexDefinition;
+    }
+
+    /**
+     * 添加映射属性
+     *
+     * @param builder
+     * @param esFieldDefinition
+     * @throws IOException
+     */
+    public static void addFieldMappingParameters(XContentBuilder builder, ESMappingDefinition esFieldDefinition) throws IOException {
+
+        boolean index = esFieldDefinition.isIndex();
+        boolean store = esFieldDefinition.isStore();
+        FieldType type = esFieldDefinition.getType();
+        DateFormat dateFormat = esFieldDefinition.getDateFormat();
+        String analyzer = esFieldDefinition.getAnalyzer();
+        String searchAnalyzer = esFieldDefinition.getSearchAnalyzer();
+        String normalizer = esFieldDefinition.getNormalizer();
+        if (store) {
+            builder.field(ESMappingBuilder.FIELD_STORE, store);
+        }
+
+        if (type != FieldType.Auto) {
+            builder.field(ESMappingBuilder.FIELD_TYPE, type.name().toLowerCase());
+            if (type == FieldType.Date && dateFormat != DateFormat.none) {
+                builder.field(ESMappingBuilder.FIELD_FORMAT, dateFormat.toString());
+            }
+        }
+        if (!index) {
+            builder.field(ESMappingBuilder.FIELD_INDEX, index);
+        }
+        if (!ESMappingBuilder.isEmpty(analyzer)) {
+            builder.field(ESMappingBuilder.FIELD_INDEX_ANALYZER, analyzer);
+        }
+        if (!ESMappingBuilder.isEmpty(searchAnalyzer)) {
+            builder.field(ESMappingBuilder.FIELD_SEARCH_ANALYZER, searchAnalyzer);
+        }
+        if (!ESMappingBuilder.isEmpty(normalizer)) {
+            builder.field(ESMappingBuilder.FIELD_NORMALIZER, normalizer);
+        }
     }
 
     public static FieldType fieldType(ESMappingDefinition esFieldDefinition){

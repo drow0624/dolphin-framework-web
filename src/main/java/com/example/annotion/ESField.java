@@ -1,7 +1,7 @@
 package com.example.annotion;
 
 
-/*{
+/**{
 
 "type" : "text", #是数据类型一般文本使用text(可分词进行模糊查询)；keyword无法被分词(不需要执行分词器)，用于精确查找
 
