@@ -11,6 +11,7 @@ public class Document {
     @DBColumn("keywords")
     @ESField(type= FieldType.Keyword)
     private String keywords;
+
     @DBColumn("hy_url")
     @ESField(type= FieldType.Text)
     private String url;
