@@ -128,7 +128,7 @@ public class ESMappingBuilder {
         ESIndexDefinition indexDefinition = esIndexDefinition(Article.class);
         log.info(indexDefinition.toString());
         log.info(FieldType.of("")+"");
-        log.info(FieldType.of("keyword")+"");
+        log.info(FieldType.of(TYPE_VALUE_KEYWORD)+"");
     }
 
 }
