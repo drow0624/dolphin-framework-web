@@ -10,7 +10,6 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.core.io.support.SpringFactoriesLoader;
 import org.springframework.util.ResourceUtils;
 
 import java.io.IOException;
@@ -58,12 +57,12 @@ public class AppEnvironmentPostProcessor implements EnvironmentPostProcessor {
         }
         log.info("Loading properties from resource " + resource.getFilename());
         System.out.println("Loading property from resource " + resource.getFilename());
-        try {
-            sources = this.propertySourceLoader.load(resource.getFilename(), resource);
-        } catch (IOException ex) {
-            throw new IllegalStateException(
-                    "Failed to load property configuration from " + resource, ex);
-        }
+//        try {
+//            sources = this.propertySourceLoader.load(resource.getFilename(), resource);
+//        } catch (IOException ex) {
+//            throw new IllegalStateException(
+//                    "Failed to load property configuration from " + resource, ex);
+//        }
         return sources;
     }
 }

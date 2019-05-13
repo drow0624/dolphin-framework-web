@@ -9,15 +9,15 @@ import lombok.Data;
 public class Document {
 
     @DBColumn("keywords")
-    @ESField(type= FieldType.Keyword)
+    @ESField(type= FieldType.KEYWORD)
     private String keywords;
 
     @DBColumn("hy_url")
-    @ESField(type= FieldType.Text)
+    @ESField(type= FieldType.TEXT)
     private String url;
 
     @DBColumn("comment")
-    @ESField(type= FieldType.Text)
+    @ESField(type= FieldType.TEXT)
     private BaseEntity text;
 
 }

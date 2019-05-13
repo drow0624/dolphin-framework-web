@@ -92,7 +92,7 @@ import java.lang.annotation.*;
 @Inherited
 public @interface ESField {
 
-    FieldType type() default FieldType.Auto;
+    FieldType type() default FieldType.AUTO;
 
     boolean index() default true;
 

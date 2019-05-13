@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.Random;
 
 @Data
 @Builder
@@ -20,30 +19,30 @@ import java.util.Random;
 public class Article extends Document{
 
     @DBColumn("id")
-    @ESField(type= FieldType.Long)
+    @ESField(type= FieldType.LONG)
     private Long id;
 
     @DBColumn("name")
-    @ESField(type= FieldType.Text)
+    @ESField(type= FieldType.TEXT)
     private String name;
 
     @DBColumn("content")
-    @ESField(type= FieldType.Text)
+    @ESField(type= FieldType.TEXT)
     private String content;
 
     @DBColumn("author")
-    @ESField(type= FieldType.Keyword)
+    @ESField(type= FieldType.KEYWORD)
     private String author;
 
     @DBColumn("create_time")
-    @ESField(type= FieldType.Date,dateFormat = DateFormat.basic_date)
+    @ESField(type= FieldType.DATE,dateFormat = DateFormat.basic_date)
     private Date createTime;
 
     @DBColumn("size")
-    @ESField(type= FieldType.Integer)
+    @ESField(type= FieldType.INTEGER)
     private Integer size;@DBColumn("size")
 
-    @ESField(type= FieldType.Integer)
+    @ESField(type= FieldType.INTEGER)
     private Integer total;
 
     public Article from(ArticleRow row){

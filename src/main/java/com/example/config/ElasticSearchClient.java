@@ -1,14 +1,9 @@
 package com.example.config;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
-
 import com.alibaba.fastjson.JSON;
-import com.example.annotion.*;
+import com.example.annotion.ESIndexDefinition;
+import com.example.annotion.ESMappingBuilder;
+import com.example.annotion.ESMappingDefinition;
 import com.example.entity.DataAccessLog;
 import com.example.entity.MonitorLog;
 import com.example.entity.SystemLog;
@@ -25,10 +20,6 @@ import org.elasticsearch.action.admin.indices.mapping.get.GetMappingsResponse;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.action.admin.indices.open.OpenIndexResponse;
-import org.elasticsearch.action.admin.indices.settings.get.GetSettingsRequest;
-import org.elasticsearch.action.admin.indices.settings.get.GetSettingsResponse;
-import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest;
-import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
@@ -40,11 +31,7 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.metadata.MappingMetaData;
 import org.elasticsearch.common.collect.ImmutableOpenMap;
 import org.elasticsearch.common.settings.Settings;
-//import org.elasticsearch.common.transport.InetSocketTransportAddress;
-//import org.elasticsearch.common.transport.InetSocketTransportAddress;
-//import org.elasticsearch.common.transport.InetSocketTransportAddress;
-//import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.common.transport.TransportAddress;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
@@ -52,11 +39,21 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
-import java.util.Collections;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 @Slf4j
-public class ElasticSearchUtil {
+public class ElasticSearchClient {
 
+    private static final String CLUSTER_NAME = "cluster.name";
+    private static final String CLIENT_TRANSPORT_SNIFF = "client.transport.sniff";
 
     /**
      * ES客户端
@@ -65,30 +62,16 @@ public class ElasticSearchUtil {
      * @throws UnknownHostException
      */
     public static TransportClient client() throws UnknownHostException {
-        //client = new PreBuiltTransportClient(Settings.EMPTY)
-
         // 连接集群的设置
         Settings settings = Settings.builder()
-                .put("cluster.name", "es") //如果集群的名字不是默认的elasticsearch，需指定
-                .put("client.transport.sniff", true) //自动嗅探
+                .put(CLUSTER_NAME, "trs-elasticsearch")
+//                .put(CLUSTER_NAME, "es")
+                .put(CLIENT_TRANSPORT_SNIFF, true) //自动嗅探
                 .build();
         return new PreBuiltTransportClient(settings)
-//                    .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
-                .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
-
-        //可用连接设置参数说明
-			/*
-			cluster.name
-				指定集群的名字，如果集群的名字不是默认的elasticsearch，需指定。
-			client.transport.sniff
-				设置为true,将自动嗅探整个集群，自动加入集群的节点到连接列表中。
-			client.transport.ignore_cluster_name
-				Set to true to ignore cluster name validation of connected nodes. (since 0.19.4)
-			client.transport.ping_timeout
-				The time to wait for a ping response from a node. Defaults to 5s.
-			client.transport.nodes_sampler_interval
-				How often to sample / ping the nodes listed and connected. Defaults to 5s.
-			*/
+//                .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
+//                .addTransportAddress(new TransportAddress(InetAddress.getByName("192.168.200.3"), 9300));
+                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.200.3"), 9300));
     }
 
     /**
@@ -122,7 +105,7 @@ public class ElasticSearchUtil {
     }
 
     /**
-     * 类型是否存在_——_——
+     * 类型是否存在
      *
      * @param client
      * @param index
@@ -221,6 +204,7 @@ public class ElasticSearchUtil {
 //        ib.setSource(builder);
         ib.setSource(json, XContentType.JSON);
         IndexResponse indexResponse = ib.get();
+//        return indexResponse.forcedRefresh();
         return indexResponse.forcedRefresh();
     }
 
@@ -276,7 +260,7 @@ public class ElasticSearchUtil {
      * @param type
      * @return
      */
-    public static Map<String, Object> obtainMapping(TransportClient client, String index, String type) {
+    public static Map<String, Object> obtainMapping(TransportClient client, String index, String type) throws IOException {
         GetMappingsResponse response = client.admin().indices().prepareGetMappings(index).get();
         ImmutableOpenMap<String, MappingMetaData> mappings = response.getMappings().get(index);
 //        ImmutableOpenMap<String, MappingMetaData> mappings = client.admin().cluster().prepareState().execute().
@@ -301,9 +285,6 @@ public class ElasticSearchUtil {
      */
     public static Map<String, Object> getById(TransportClient client, String index, String type, String id) {
         GetResponse response = client.prepareGet(index, type, id).get();
-
-//        /*MultiGetResponse multiGetItemResponses =*/ client.prepareMultiGet().add( index, type, id);
-
         return response.getSourceAsMap();
     }
 
@@ -334,13 +315,7 @@ public class ElasticSearchUtil {
     }
 
     /**
-     * if (mapping instanceof String) {
-     * requestBuilder.setSource(String.valueOf(mapping), XContentType.JSON);
-     * } else if (mapping instanceof Map) {
-     * requestBuilder.setSource((Map)mapping);
-     * } else if (mapping instanceof XContentBuilder) {
-     * requestBuilder.setSource((XContentBuilder)mapping);
-     * }
+     * 创建映射，自动检测已存在映射，如果新增资字段，则自动更新字段
      *
      * @param client
      * @param clazz
@@ -356,7 +331,7 @@ public class ElasticSearchUtil {
         String index = indexDefinition.getIndexName();
         String type = indexDefinition.getType();
         if (!isExistsIndex(client, index)) {
-            log.info(String.format("索引：%s 已存在", index));
+            log.warn(String.format("索引：%s 不存在", index));
 //            createIndex(client, index, null);
             return false;
         } else {
@@ -368,9 +343,14 @@ public class ElasticSearchUtil {
             }
         }
         if (esFieldDefinitions != null && !esFieldDefinitions.isEmpty()) {
-            log.info(String.format("索引：%s,类型：%s,映射新增属性:%s", index, type, JSON.toJSON(esFieldDefinitions)));
+            StringBuilder attributes = new StringBuilder();
+            esFieldDefinitions.stream().forEach(field -> {
+                attributes.append(field.getFieldName()).append(",").append(field.getType()).append(" ");
+            });
+            log.info(String.format("索引：%s,类型：%s,映射新增属性:%s", index, type, attributes));
             XContentBuilder builder = XContentFactory.jsonBuilder();
-            builder.startObject()// start, start type, start properties
+            // start, start type, start properties
+            builder.startObject()
                     .startObject(type)
                     .startObject(ESMappingBuilder.FIELD_PROPERTIES);
             for (ESMappingDefinition esFieldDefinition : esFieldDefinitions) {
@@ -381,14 +361,14 @@ public class ElasticSearchUtil {
             }
             builder.endObject()
                     .endObject()
-                    .endObject();// start, start type, start properties
+                    .endObject();
+            // start, start type, start properties
             PutMappingRequest mapping = Requests.putMappingRequest(index).type(type).source(builder);
             PutMappingResponse putMappingResponse = client.admin().indices().putMapping(mapping).actionGet();
             return putMappingResponse.isAcknowledged();
         }
         return true;
     }
-
 
 
     /**
@@ -420,6 +400,7 @@ public class ElasticSearchUtil {
     }
 
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
+
 //        初始化客户端
         TransportClient client = client();
 //        Map<String, Object> mappingMetaData = null;
@@ -430,7 +411,7 @@ public class ElasticSearchUtil {
 //        创建文档
 //        createDocument(client,"text_index","tweet",null,JSON.toJSONString(new HashMap<String, Object>() {{
 //            put("user", "yang.cao"+System.nanoTime());
-//            put("postDate", new Date());
+//            put("postDate", new DATE());
 //            put("message", "msg:"+System.nanoTime());
 //            put("name", "name:"+UUID.randomUUID()+System.nanoTime());
 //            put("nameXX", "nameXX:"+System.nanoTime());
@@ -455,7 +436,6 @@ public class ElasticSearchUtil {
 
         isSuccess = createMapping(client, SystemLog.class);
         System.out.println("修改映射：" + isSuccess);
-
 
 //        获取映射
 //        mappingMetaData = obtainMapping(client, "doc_index", "article");
@@ -490,7 +470,6 @@ public class ElasticSearchUtil {
                 "tokenizer": "standard"
         }*/
 
-
         /*
         XContentBuilder builder = XContentFactory.jsonBuilder();
         builder.startObject();
@@ -502,18 +481,14 @@ public class ElasticSearchUtil {
             builder.endObject();
         builder.endObject();
 
-
         builder.startObject("tokenizer");
             builder.startObject("my_tokenizer");
             builder.field("type", "pattern");
             builder.field("pattern", ",");
             builder.endObject();
         builder.endObject();
-
-
         builder.endObject();
         builder.endObject();
-
         */
 
 //        Map<String, Object> analyzersConfig = new HashMap<>();
@@ -543,8 +518,6 @@ public class ElasticSearchUtil {
 
 //        UpdateSettingsResponse response = client.admin().indices()
 //                .updateSettings(settingRequest).get();
-
-
         client.close();
     }
 }

@@ -1,17 +1,17 @@
 package com.example.endpoint;
 
-import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
-import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+//import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+//import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Endpoint(id = "redis")
+//@Endpoint(id = "redis")
 @Component
 public class RedisEndPoint {
 
-    @ReadOperation
+//    @ReadOperation
     public Map<String, String> hello() {
         Map<String, String> result = new HashMap<>();
         result.put("author", "Levin");

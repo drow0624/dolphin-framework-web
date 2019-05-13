@@ -14,14 +14,14 @@ public class DateTimeUtil {
     private DateTimeUtil(){}
 
 
-    // 01. Date --> LocalDateTime
+    // 01. DATE --> LocalDateTime
     public static LocalDateTime UDateToLocalDateTime(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
         return LocalDateTime.ofInstant(instant, zone);
     }
 
-    // 02. Date --> LocalDate
+    // 02. DATE --> LocalDate
     public static LocalDate UDateToLocalDate(Date date) {
         Instant instant = date.toInstant();
         ZoneId zone = ZoneId.systemDefault();
@@ -29,7 +29,7 @@ public class DateTimeUtil {
         return localDateTime.toLocalDate();
     }
 
-    // 03. Date --> LocalTime
+    // 03. DATE --> LocalTime
     public static void UDateToLocalTime(Date date) {
         Instant instant = date.toInstant();//时间片段
         ZoneId zone = ZoneId.systemDefault();//时区
@@ -38,7 +38,7 @@ public class DateTimeUtil {
     }
 
 
-    // 04. LocalDateTime --> Date
+    // 04. LocalDateTime --> DATE
     public static Date LocalDateTimeToUdate(LocalDateTime localDateTime) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDateTime.atZone(zone).toInstant();
@@ -46,14 +46,14 @@ public class DateTimeUtil {
     }
 
 
-    // 05. LocalDate --> Date
+    // 05. LocalDate --> DATE
     public static Date LocalDateToUdate(LocalDate localDate) {
         ZoneId zone = ZoneId.systemDefault();
         Instant instant = localDate.atStartOfDay().atZone(zone).toInstant();
         return Date.from(instant);
     }
 
-    // 06. LocalTime --> Date
+    // 06. LocalTime --> DATE
     public static Date LocalTimeToUdate() {
         LocalTime localTime = LocalTime.now();
         LocalDate localDate = LocalDate.now();

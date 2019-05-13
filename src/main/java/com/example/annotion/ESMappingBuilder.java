@@ -89,9 +89,9 @@ public class ESMappingBuilder {
             builder.field(ESMappingBuilder.FIELD_STORE, store);
         }
 
-        if (type != FieldType.Auto) {
+        if (type != FieldType.AUTO) {
             builder.field(ESMappingBuilder.FIELD_TYPE, type.name().toLowerCase());
-            if (type == FieldType.Date && dateFormat != DateFormat.none) {
+            if (type == FieldType.DATE && dateFormat != DateFormat.none) {
                 builder.field(ESMappingBuilder.FIELD_FORMAT, dateFormat.toString());
             }
         }

@@ -1,6 +1,6 @@
 package com.example.service;
 
-import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+//import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.http.HttpStatus;
