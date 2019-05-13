@@ -1,6 +1,10 @@
-package com.example.annotion;
+package com.example.es;
 
 import com.example.entity.Article;
+import com.example.es.annotation.DateFormat;
+import com.example.es.annotation.ESDocument;
+import com.example.es.annotation.ESField;
+import com.example.es.annotation.FieldType;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 

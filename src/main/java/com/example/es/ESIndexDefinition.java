@@ -1,4 +1,4 @@
-package com.example.annotion;
+package com.example.es;
 
 import lombok.Builder;
 import lombok.Data;

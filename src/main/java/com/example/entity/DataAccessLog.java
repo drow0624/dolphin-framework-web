@@ -1,8 +1,8 @@
 package com.example.entity;
 
-import com.example.annotion.ESDocument;
-import com.example.annotion.ESField;
-import com.example.annotion.FieldType;
+import com.example.es.annotation.ESDocument;
+import com.example.es.annotation.ESField;
+import com.example.es.annotation.FieldType;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j
-@ESDocument(indexName = "uirb_log_index_t",type = "uirb_data_access")
+@ESDocument(indexName = "uirb_log_index",type = "uirb_data_access")
 public class DataAccessLog implements Serializable {
 
 

@@ -1,9 +1,9 @@
-package com.example.config;
+package com.example.es.client;
 
 import com.alibaba.fastjson.JSON;
-import com.example.annotion.ESIndexDefinition;
-import com.example.annotion.ESMappingBuilder;
-import com.example.annotion.ESMappingDefinition;
+import com.example.es.ESIndexDefinition;
+import com.example.es.ESMappingBuilder;
+import com.example.es.ESMappingDefinition;
 import com.example.entity.DataAccessLog;
 import com.example.entity.MonitorLog;
 import com.example.entity.SystemLog;
@@ -31,7 +31,8 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.cluster.metadata.MappingMetaData;
 import org.elasticsearch.common.collect.ImmutableOpenMap;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
+//import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
@@ -64,14 +65,14 @@ public class ElasticSearchClient {
     public static TransportClient client() throws UnknownHostException {
         // 连接集群的设置
         Settings settings = Settings.builder()
-                .put(CLUSTER_NAME, "trs-elasticsearch")
-//                .put(CLUSTER_NAME, "es")
+//                .put(CLUSTER_NAME, "trs-elasticsearch")//集群名称
+                .put(CLUSTER_NAME, "es")//集群名称
                 .put(CLIENT_TRANSPORT_SNIFF, true) //自动嗅探
                 .build();
         return new PreBuiltTransportClient(settings)
 //                .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
-//                .addTransportAddress(new TransportAddress(InetAddress.getByName("192.168.200.3"), 9300));
-                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.200.3"), 9300));
+                .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
+//                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.200.3"), 9300));
     }
 
     /**
@@ -152,27 +153,33 @@ public class ElasticSearchClient {
         builder.startObject()
                 .startObject(type)
                 .startObject(ESMappingBuilder.FIELD_PROPERTIES); // start, start type, start properties
-        if (!mappingPropsMap.isEmpty()) {
+        if (mappingPropsMap.isEmpty()) {
+            return false;
+        }
             for (Map.Entry<String, Map<String, Object>> prop : mappingPropsMap.entrySet()) {
                 if (prop.getKey() != null) {
-                    builder.startObject(prop.getKey()); // start prop.getkey()
-                    if (!prop.getValue().isEmpty()) {
-                        for (Map.Entry<String, Object> field : prop.getValue().entrySet()) {
-                            String key = field.getKey();
-                            Object value = field.getValue();
-                            if (key != null && !key.trim().isEmpty() && value != null) {
-                                builder.field(key, value);
-                            }
-                        }
-                    }
-                    builder.endObject(); // end prop.getKey()
+                    addAttribute(builder, prop);
                 }
             }
-        }
+
         builder.endObject().endObject().endObject(); // end start, end type, end properties
         PutMappingRequest mapping = Requests.putMappingRequest(index).type(type).source(builder);
         PutMappingResponse putMappingResponse = client.admin().indices().putMapping(mapping).actionGet();
         return putMappingResponse.isAcknowledged();
+    }
+
+    private static void addAttribute(XContentBuilder builder, Map.Entry<String, Map<String, Object>> prop) throws IOException {
+        builder.startObject(prop.getKey()); // start prop.getkey()
+        if (!prop.getValue().isEmpty()) {
+            for (Map.Entry<String, Object> field : prop.getValue().entrySet()) {
+                String key = field.getKey();
+                Object value = field.getValue();
+                if (key != null && !key.trim().isEmpty() && value != null) {
+                    builder.field(key, value);
+                }
+            }
+        }
+        builder.endObject(); // end prop.getKey()
     }
 
     /**
@@ -204,7 +211,6 @@ public class ElasticSearchClient {
 //        ib.setSource(builder);
         ib.setSource(json, XContentType.JSON);
         IndexResponse indexResponse = ib.get();
-//        return indexResponse.forcedRefresh();
         return indexResponse.forcedRefresh();
     }
 
@@ -250,7 +256,7 @@ public class ElasticSearchClient {
     /**
      * 获取映射关系
      * {
-     * "message":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},//Map
+     * "message":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},
      * "postDate":{"type":"date"},
      * "user":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}}
      * }
@@ -263,9 +269,6 @@ public class ElasticSearchClient {
     public static Map<String, Object> obtainMapping(TransportClient client, String index, String type) throws IOException {
         GetMappingsResponse response = client.admin().indices().prepareGetMappings(index).get();
         ImmutableOpenMap<String, MappingMetaData> mappings = response.getMappings().get(index);
-//        ImmutableOpenMap<String, MappingMetaData> mappings = client.admin().cluster().prepareState().execute().
-//        execute.actionGet().getState().getMetaData().getIndices()
-//                .get(index).getMappings();
         MappingMetaData mappingMetaData = mappings.get(type);
         Map<String, Object> propertiesMapping = null;
         if (mappingMetaData != null) {

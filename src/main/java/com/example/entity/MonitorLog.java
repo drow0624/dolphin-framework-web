@@ -1,8 +1,8 @@
 package com.example.entity;
 
-import com.example.annotion.ESDocument;
-import com.example.annotion.ESField;
-import com.example.annotion.FieldType;
+import com.example.es.annotation.ESDocument;
+import com.example.es.annotation.ESField;
+import com.example.es.annotation.FieldType;
 import lombok.*;
 
 import java.io.Serializable;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ESDocument(indexName = "uirb_log_index_t",type = "uirb_monitoring_log")
+@ESDocument(indexName = "uirb_log_index",type = "uirb_monitoring_log")
 public class MonitorLog implements Serializable {
 
     private static final long serialVersionUID = 1L;

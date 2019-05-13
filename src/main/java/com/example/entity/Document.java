@@ -1,8 +1,8 @@
 package com.example.entity;
 
 import com.example.annotion.DBColumn;
-import com.example.annotion.ESField;
-import com.example.annotion.FieldType;
+import com.example.es.annotation.ESField;
+import com.example.es.annotation.FieldType;
 import lombok.Data;
 
 @Data

@@ -3,6 +3,7 @@ package com.example.util;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.ResolvableType;
@@ -43,15 +44,15 @@ public class SpringContextUtil implements ApplicationContextAware, BeanFactory {
         return SpringContextUtil.applicationContext.getBean(requiredType,args);
     }
 
-//    @Override
-//    public <T> ObjectProvider<T> getBeanProvider(Class<T> requiredType) {
-//        return SpringContextUtil.applicationContext.getBeanProvider(requiredType);
-//    }
-//
-//    @Override
-//    public <T> ObjectProvider<T> getBeanProvider(ResolvableType requiredType) {
-//        return SpringContextUtil.applicationContext.getBeanProvider(requiredType);
-//    }
+    @Override
+    public <T> ObjectProvider<T> getBeanProvider(Class<T> requiredType) {
+        return SpringContextUtil.applicationContext.getBeanProvider(requiredType);
+    }
+
+    @Override
+    public <T> ObjectProvider<T> getBeanProvider(ResolvableType requiredType) {
+        return SpringContextUtil.applicationContext.getBeanProvider(requiredType);
+    }
 
     @Override
     public boolean containsBean(String name) {

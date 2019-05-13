@@ -1,6 +1,10 @@
 package com.example.entity;
 
 import com.example.annotion.*;
+import com.example.es.annotation.DateFormat;
+import com.example.es.annotation.ESDocument;
+import com.example.es.annotation.ESField;
+import com.example.es.annotation.FieldType;
 import com.example.excel.article.ArticleRow;
 import com.example.util.DateTimeUtil;
 import lombok.AllArgsConstructor;
