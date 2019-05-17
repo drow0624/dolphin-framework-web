@@ -2,12 +2,12 @@ package com.example.mapper.mapper;
 
 
 import com.alibaba.fastjson.JSON;
-import com.company.Application;
-import com.company.project.sysmgr.demo.domain.Article;
-import com.company.common.db.mapper.CommonMapper;
-import com.company.common.db.mapper.condition.QueryFilter;
-import com.company.common.db.mapper.pojo.Table;
-import com.company.common.util.DBReflectionUtil;
+import priv.cy.Application;
+import priv.cy.project.sysmgr.demo.domain.Article;
+import priv.cy.common.db.mapper.CommonMapper;
+import priv.cy.common.db.mapper.condition.QueryFilter;
+import priv.cy.common.db.mapper.pojo.Table;
+import priv.cy.common.util.DBReflectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

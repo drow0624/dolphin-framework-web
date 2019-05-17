@@ -9,10 +9,10 @@
         <!--<version>1.5.6.RELEASE</version>-->
         <relativePath/>
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>springboot</artifactId>
+    <groupId>priv.cy</groupId>
+    <artifactId>nature</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot</name>
+    <name>nature</name>
     <description>Demo project for Spring Boot</description>
     <dependencies>
         <dependency>

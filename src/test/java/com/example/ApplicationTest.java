@@ -1,7 +1,7 @@
 package com.example;
 
-import com.company.common.db.annotation.DBTable;
-import com.company.project.sysmgr.demo.domain.Article;
+import priv.cy.common.db.annotation.DBTable;
+import priv.cy.project.sysmgr.demo.domain.Article;
 import org.junit.Test;
 import org.springframework.web.bind.annotation.RequestMapping;
 

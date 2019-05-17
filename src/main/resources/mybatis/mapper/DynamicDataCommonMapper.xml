@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.company.common.db.mapper.DynamicDataCommonMapper">
+<mapper namespace="priv.cy.common.db.mapper.DynamicDataCommonMapper">
 
     <select id="exeSQL" parameterType="java.lang.String">
         ${exeSql}
     </select>
 
-    <select id="queryObjs" parameterType="com.company.common.db.mapper.condition.DynamicQueryFilter"
+    <select id="queryObjs" parameterType="priv.cy.common.db.mapper.condition.DynamicQueryFilter"
             resultType="java.util.LinkedHashMap">
         SELECT
         <include refid="selector_sql"/>
@@ -15,7 +15,7 @@
         <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>
     </select>
 
-    <select id="queryObj" parameterType="com.company.common.db.mapper.condition.DynamicQueryFilter"
+    <select id="queryObj" parameterType="priv.cy.common.db.mapper.condition.DynamicQueryFilter"
             resultType="java.util.LinkedHashMap">
         SELECT
         <include refid="selector_sql"/>
@@ -35,7 +35,7 @@
     </sql>
 
 
-    <insert id="insert" parameterType="com.company.common.db.mapper.condition.DynamicDataInserter">
+    <insert id="insert" parameterType="priv.cy.common.db.mapper.condition.DynamicDataInserter">
         insert into ${inserter.tableName}
         <foreach collection="inserter.fields" item="fieldName" open="(" separator="," close=")">
             ${fieldName}
@@ -58,7 +58,7 @@
     </update>
 
 
-    <select id="delete" parameterType="com.company.common.db.mapper.condition.DynamicQueryFilter">
+    <select id="delete" parameterType="priv.cy.common.db.mapper.condition.DynamicQueryFilter">
         DELETE FROM ${filter.tableName}
         WHERE 1=1
         <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>

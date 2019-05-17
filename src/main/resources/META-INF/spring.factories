@@ -1,1 +1,1 @@
-org.springframework.boot.env.EnvironmentPostProcessor=com.company.framework.config.env.AppEnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=priv.cy.framework.config.env.AppEnvironmentPostProcessor
