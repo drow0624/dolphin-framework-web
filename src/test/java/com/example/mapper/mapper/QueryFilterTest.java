@@ -2,19 +2,17 @@ package com.example.mapper.mapper;
 
 
 import com.alibaba.fastjson.JSON;
-import com.example.Application;
-import com.example.entity.Article;
-import com.example.mapper.CommonMapper;
-import com.example.mapper.condition.QueryFilter;
-import com.example.mapper.domain.Table;
-import com.example.util.DBReflectionUtil;
+import com.company.Application;
+import com.company.project.sysmgr.demo.domain.Article;
+import com.company.common.db.mapper.CommonMapper;
+import com.company.common.db.mapper.condition.QueryFilter;
+import com.company.common.db.mapper.pojo.Table;
+import com.company.common.util.DBReflectionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

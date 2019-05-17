@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.mapper.ArticleMapper">
+<mapper namespace="com.company.project.sysmgr.demo.mapper.ArticleMapper">
 
-    <resultMap id="articleMap" type="com.example.entity.Article">
+    <resultMap id="articleMap" type="com.company.project.sysmgr.demo.domain.Article">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
@@ -12,7 +12,7 @@
     </resultMap>
 
 
-    <insert id="add" parameterType="com.example.entity.Article">
+    <insert id="add" parameterType="com.company.project.sysmgr.demo.domain.Article">
         insert into article
         (name,content,author,create_time)
         values

@@ -1,16 +1,10 @@
 package com.example;
 
-import com.example.annotion.DBTable;
-import com.example.entity.Article;
+import com.company.common.db.annotation.DBTable;
+import com.company.project.sysmgr.demo.domain.Article;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.BeanUtils;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
 //@RunWith(SpringRunner.class)
