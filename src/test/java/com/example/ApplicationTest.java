@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 //@RunWith(SpringRunner.class)
 public class ApplicationTest {
@@ -47,6 +48,15 @@ public class ApplicationTest {
         System.out.println(Arrays.asList(b));//1.4没有可变参数，使用的是数组,[[I@1bc4459]
         System.out.println(Arrays.asList(d));//[jjj, kkkk]
 
+
+        IntStream.range(1,100).forEach(x->{
+            System.out.println("trs.user"+x);
+        });
+
+
+
     }
+
+
 
 }
