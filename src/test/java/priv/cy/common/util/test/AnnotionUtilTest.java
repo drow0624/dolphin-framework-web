@@ -1,4 +1,4 @@
-package com.example.util.test;
+package priv.cy.common.util.test;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;

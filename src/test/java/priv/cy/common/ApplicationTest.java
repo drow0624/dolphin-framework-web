@@ -1,4 +1,4 @@
-package com.example;
+package priv.cy.common;
 
 import priv.cy.common.db.annotation.DBTable;
 import priv.cy.project.sysmgr.demo.domain.Article;
