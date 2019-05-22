@@ -6,5 +6,5 @@ import lombok.Data;
 public class Car {
     private Long id;
     private String name;
-    private Insurance insurance;
+//    private Insurance insurance;
 }
