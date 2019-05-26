@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <option name="USE_RELEASE_OPTION" value="false" />
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/../btrace-maven/btrace-project-archetype/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="btrace-maven-plugin" />
+        <module name="btrace-project-archetype" />
+        <module name="commons-lang" />
+        <module name="do-btrace" />
+        <module name="hill" />
+        <module name="nature" />
         <module name="spring.ioc" />
         <module name="springboot" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="translator.service" target="1.8" />
-      <module name="uirb" target="1.8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="springboot" options="-parameters" />
+      <module name="hill" options="-parameters" />
+      <module name="nature" options="-parameters" />
     </option>
   </component>
 </project>

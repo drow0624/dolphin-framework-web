@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="test-lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../btrace/test-lib/asm-all-5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btrace/test-lib/junit-4.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btrace/test-lib/ant-junit.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

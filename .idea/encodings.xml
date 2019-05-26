@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$/../btrace-maven" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../btrace-maven/btrace-maven-plugin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../btrace-maven/btrace-project-archetype" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../commons-lang" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../do-btrace" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../hill" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../i24x-commons" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../spring.ioc" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../uirb.translator.service" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../unified.info.res.base" charset="UTF-8" />
   </component>
 </project>

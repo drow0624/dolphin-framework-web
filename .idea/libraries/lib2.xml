@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="lib2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../btracedemo/lib/fastjson-1.1.30.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btracedemo/lib/btrace-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btracedemo/lib/btrace-boot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btracedemo/lib/btrace-agent.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btracedemo/lib/tools.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btracedemo/lib/bcel-6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btracedemo/lib/guava-15.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

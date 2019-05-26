@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="build">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../btrace/build/btrace-boot.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btrace/build/btrace-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../btrace/build/btrace-agent.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
