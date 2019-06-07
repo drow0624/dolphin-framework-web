@@ -2,8 +2,6 @@ package com.lsl.nature.common.es;
 
 import com.lsl.nature.common.es.annotation.DateFormat;
 import com.lsl.nature.common.es.annotation.FieldType;
-import priv.cy.common.es.annotation.FieldType;
-import priv.cy.common.es.annotation.DateFormat;
 import lombok.*;
 
 @Data

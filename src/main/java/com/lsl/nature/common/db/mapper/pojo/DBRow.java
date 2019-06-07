@@ -2,8 +2,6 @@ package com.lsl.nature.common.db.mapper.pojo;
 
 import com.lsl.nature.common.db.annotation.DBColumn;
 import com.lsl.nature.common.db.annotation.DBTable;
-import priv.cy.common.db.annotation.DBColumn;
-import priv.cy.common.db.annotation.DBTable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

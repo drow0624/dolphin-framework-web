@@ -1,8 +1,7 @@
 package com.lsl.nature.common.db.mapper.pojo;
 
 import com.lsl.nature.common.util.DBReflectionUtil;
-import priv.cy.project.sysmgr.demo.domain.Article;
-import priv.cy.common.util.DBReflectionUtil;
+import com.lsl.nature.project.sysmgr.demo.domain.Article;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 

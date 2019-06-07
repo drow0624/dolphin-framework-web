@@ -3,9 +3,6 @@ package com.lsl.nature.common.db.mapper;
 import com.lsl.nature.common.db.mapper.condition.DynamicDataInserter;
 import com.lsl.nature.common.db.mapper.condition.DynamicDataUpdater;
 import com.lsl.nature.common.db.mapper.condition.DynamicQueryFilter;
-import priv.cy.common.db.mapper.condition.DynamicDataInserter;
-import priv.cy.common.db.mapper.condition.DynamicDataUpdater;
-import priv.cy.common.db.mapper.condition.DynamicQueryFilter;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,7 +1,7 @@
 package com.lsl.nature.project.sysmgr.demo.controller;
 
-import priv.cy.project.sysmgr.demo.domain.Article;
-import priv.cy.project.sysmgr.demo.service.ArticleService;
+import com.lsl.nature.project.sysmgr.demo.domain.Article;
+import com.lsl.nature.project.sysmgr.demo.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;

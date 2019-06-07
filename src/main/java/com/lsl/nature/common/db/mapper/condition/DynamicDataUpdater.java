@@ -1,7 +1,7 @@
 package com.lsl.nature.common.db.mapper.condition;
 
-import priv.cy.common.db.mapper.pojo.CondDBField;
-import priv.cy.common.db.mapper.pojo.DBField;
+import com.lsl.nature.common.db.mapper.pojo.CondDBField;
+import com.lsl.nature.common.db.mapper.pojo.DBField;
 import lombok.Getter;
 
 import java.util.ArrayList;

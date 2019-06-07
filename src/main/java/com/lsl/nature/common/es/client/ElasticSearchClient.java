@@ -1,12 +1,12 @@
 package com.lsl.nature.common.es.client;
 
 import com.alibaba.fastjson.JSON;
-import priv.cy.project.sysmgr.demo.domain.DataAccessLog;
-import priv.cy.project.sysmgr.demo.domain.MonitorLog;
-import priv.cy.project.sysmgr.demo.domain.SystemLog;
-import priv.cy.common.es.ESIndexDefinition;
-import priv.cy.common.es.ESMappingDefinition;
-import priv.cy.common.es.ESMappingBuilder;
+import com.lsl.nature.common.es.ESIndexDefinition;
+import com.lsl.nature.common.es.ESMappingBuilder;
+import com.lsl.nature.common.es.ESMappingDefinition;
+import com.lsl.nature.project.sysmgr.demo.domain.DataAccessLog;
+import com.lsl.nature.project.sysmgr.demo.domain.MonitorLog;
+import com.lsl.nature.project.sysmgr.demo.domain.SystemLog;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.close.CloseIndexResponse;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequestBuilder;

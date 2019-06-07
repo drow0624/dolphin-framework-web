@@ -1,6 +1,7 @@
 package com.lsl.nature.project.sysmgr.demo.service;
 
-import priv.cy.project.sysmgr.demo.domain.Article;
+
+import com.lsl.nature.project.sysmgr.demo.domain.Article;
 
 import java.util.List;
 

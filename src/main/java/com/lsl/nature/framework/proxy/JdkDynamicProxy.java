@@ -4,8 +4,6 @@ import com.lsl.nature.framework.annotation.enable.HttpServer;
 import com.lsl.nature.framework.annotation.enable.Server;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.ClassUtils;
-import priv.cy.framework.annotation.enable.HttpServer;
-import priv.cy.framework.annotation.enable.Server;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

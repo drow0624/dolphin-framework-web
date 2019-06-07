@@ -6,9 +6,6 @@ import com.lsl.nature.framework.annotation.enable.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import priv.cy.framework.annotation.enable.EnableServer;
-import priv.cy.framework.annotation.enable.FtpServer;
-import priv.cy.framework.annotation.enable.Server;
 
 //spring-boot-autoconfigure-2.1.3.RELEASE.jar
 //WebMvcAutoConfiguration

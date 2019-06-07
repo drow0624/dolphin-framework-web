@@ -3,9 +3,6 @@ package com.lsl.nature.project.sysmgr.demo.domain;
 import com.lsl.nature.common.es.annotation.ESDocument;
 import com.lsl.nature.common.es.annotation.ESField;
 import com.lsl.nature.common.es.annotation.FieldType;
-import priv.cy.common.es.annotation.ESDocument;
-import priv.cy.common.es.annotation.FieldType;
-import priv.cy.common.es.annotation.ESField;
 import lombok.*;
 
 import java.io.Serializable;

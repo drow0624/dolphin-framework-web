@@ -4,11 +4,7 @@ import com.lsl.nature.common.es.annotation.DateFormat;
 import com.lsl.nature.common.es.annotation.ESDocument;
 import com.lsl.nature.common.es.annotation.ESField;
 import com.lsl.nature.common.es.annotation.FieldType;
-import priv.cy.project.sysmgr.demo.domain.Article;
-import priv.cy.common.es.annotation.DateFormat;
-import priv.cy.common.es.annotation.ESDocument;
-import priv.cy.common.es.annotation.FieldType;
-import priv.cy.common.es.annotation.ESField;
+import com.lsl.nature.project.sysmgr.demo.domain.Article;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 

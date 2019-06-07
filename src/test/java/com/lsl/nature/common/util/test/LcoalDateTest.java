@@ -1,9 +1,9 @@
 package com.lsl.nature.common.util.test;
 
 import com.alibaba.fastjson.JSON;
+import com.lsl.nature.project.sysmgr.demo.domain.Article;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
-import priv.cy.project.sysmgr.demo.domain.Article;
 
 import java.util.HashMap;
 import java.util.Map;

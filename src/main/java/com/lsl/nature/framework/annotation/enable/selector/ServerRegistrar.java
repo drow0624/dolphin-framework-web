@@ -1,11 +1,11 @@
 package com.lsl.nature.framework.annotation.enable.selector;
 
+import com.lsl.nature.framework.annotation.enable.EnableServer;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
-import priv.cy.framework.annotation.enable.EnableServer;
 
 import java.util.Map;
 

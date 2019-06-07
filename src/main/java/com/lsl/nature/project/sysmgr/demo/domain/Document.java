@@ -3,10 +3,7 @@ package com.lsl.nature.project.sysmgr.demo.domain;
 import com.lsl.nature.common.db.annotation.DBColumn;
 import com.lsl.nature.common.es.annotation.ESField;
 import com.lsl.nature.common.es.annotation.FieldType;
-import priv.cy.common.es.annotation.FieldType;
-import priv.cy.common.db.annotation.DBColumn;
-import priv.cy.common.es.annotation.ESField;
-import priv.cy.project.common.domain.BaseEntity;
+import com.lsl.nature.project.common.domain.BaseEntity;
 import lombok.Data;
 
 @Data

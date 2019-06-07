@@ -1,7 +1,7 @@
 package com.lsl.nature.project.sysmgr.demo.service;
 
-import priv.cy.project.sysmgr.demo.domain.Article;
-import priv.cy.project.sysmgr.demo.mapper.ArticleMapper;
+import com.lsl.nature.project.sysmgr.demo.domain.Article;
+import com.lsl.nature.project.sysmgr.demo.mapper.ArticleMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

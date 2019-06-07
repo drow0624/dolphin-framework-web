@@ -2,10 +2,10 @@ package com.lsl.nature.common.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONWriter;
-import priv.cy.project.sysmgr.demo.domain.Article;
-import priv.cy.project.sysmgr.demo.domain.CommentText;
-import priv.cy.common.db.annotation.DBColumn;
-import priv.cy.common.db.annotation.DBTable;
+import com.lsl.nature.common.db.annotation.DBColumn;
+import com.lsl.nature.common.db.annotation.DBTable;
+import com.lsl.nature.project.sysmgr.demo.domain.Article;
+import com.lsl.nature.project.sysmgr.demo.domain.CommentText;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 

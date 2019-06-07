@@ -1,10 +1,10 @@
 package com.lsl.nature.framework.aop.advice;
 
 
+import com.lsl.nature.framework.aop.RailwayStation;
+import com.lsl.nature.framework.aop.TicketService;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.framework.ProxyFactoryBean;
-import priv.cy.framework.aop.RailwayStation;
-import priv.cy.framework.aop.TicketService;
 
 public class RailWayProxyFactoryBean {
 

@@ -1,7 +1,7 @@
 package com.lsl.nature.common.db.mapper.condition;
 
-import priv.cy.common.db.mapper.pojo.DBField;
-import priv.cy.common.db.mapper.pojo.InsertColumn;
+import com.lsl.nature.common.db.mapper.pojo.DBField;
+import com.lsl.nature.common.db.mapper.pojo.InsertColumn;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;

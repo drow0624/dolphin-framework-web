@@ -1,10 +1,8 @@
 package com.lsl.nature.framework.annotation.enable.selector;
 
-import org.springframework.context.annotation.Conditional;
+import com.lsl.nature.framework.annotation.enable.EnableServer;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
-import priv.cy.framework.annotation.condition.DBTypeCondition;
-import priv.cy.framework.annotation.enable.EnableServer;
 
 import java.util.Map;
 

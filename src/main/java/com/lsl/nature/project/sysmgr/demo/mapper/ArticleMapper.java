@@ -1,6 +1,6 @@
 package com.lsl.nature.project.sysmgr.demo.mapper;
 
-import priv.cy.project.sysmgr.demo.domain.Article;
+import com.lsl.nature.project.sysmgr.demo.domain.Article;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,12 +1,11 @@
 package com.lsl.nature.common.db.mapper.condition;
 
-import priv.cy.common.db.mapper.pojo.*;
+import com.lsl.nature.common.db.mapper.pojo.*;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
-import priv.cy.common.db.mapper.pojo.*;
 
 import java.util.ArrayList;
 import java.util.List;

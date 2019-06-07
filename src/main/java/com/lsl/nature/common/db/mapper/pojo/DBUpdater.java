@@ -1,7 +1,6 @@
 package com.lsl.nature.common.db.mapper.pojo;
 
 import com.lsl.nature.common.db.mapper.condition.QueryFilter;
-import priv.cy.common.db.mapper.condition.QueryFilter;
 import lombok.Data;
 
 import java.util.ArrayList;
