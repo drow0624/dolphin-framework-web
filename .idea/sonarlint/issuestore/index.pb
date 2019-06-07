@@ -1,8 +1,4 @@
 
-Z
-*src/main/java/com/example/Application.java,f/2/f280eb83b812f09c938418ec83b682b33211b73c
-‚
-Rtarget/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst,8/a/8ae396f369da14bb5c0973286facff8fb2c70d56
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 Y

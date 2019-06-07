@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="priv.cy.common.db.mapper.CommonMapper">
+<mapper namespace="com.lsl.nature.common.db.mapper.CommonMapper">
 
     <select id="select" resultType="java.util.Map">
         SELECT * FROM ${filter.table.name}
@@ -18,7 +18,7 @@
         <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>
     </update>
 
-    <insert id="insert" parameterType="priv.cy.common.db.mapper.pojo.DBRow" useGeneratedKeys="true" keyProperty="id"
+    <insert id="insert" parameterType="com.lsl.nature.common.db.mapper.pojo.DBRow" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id">
         insert into ${tableName}
         <foreach collection="fields" item="fieldName" open="(" separator="," close=")">
@@ -44,13 +44,13 @@
     </insert>
 
 
-    <select id="delete" parameterType="priv.cy.common.db.mapper.condition.QueryFilter">
+    <select id="delete" parameterType="com.lsl.nature.common.db.mapper.condition.QueryFilter">
         DELETE FROM ${filter.table.tableName}
         WHERE 1=1
         <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>
     </select>
 
-    <select id="count" parameterType="priv.cy.common.db.mapper.condition.QueryFilter" resultType="java.lang.Long">
+    <select id="count" parameterType="com.lsl.nature.common.db.mapper.condition.QueryFilter" resultType="java.lang.Long">
         SELECT count(1) FROM ${filter.table.tableName}
         WHERE 1=1
         <include refid="com.example.mybatis.mapper.Condition.all_conditions_sql"/>

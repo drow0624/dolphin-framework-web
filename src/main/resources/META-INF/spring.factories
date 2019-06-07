@@ -1,1 +1,1 @@
-org.springframework.boot.env.EnvironmentPostProcessor=priv.cy.framework.config.env.AppEnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=com.lsl.nature.framework.config.env.AppEnvironmentPostProcessor

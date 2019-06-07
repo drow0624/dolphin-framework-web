@@ -1,8 +1,0 @@
-
-|squid:UselessImportCheck"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡ž¸Îùÿÿÿÿ
-Hsquid:S1602",Remove useless curly braces around statement(‚“‘Ôûÿÿÿÿ
-T
-squid:S106"9Replace this use of System.out or System.err by a logger.(ØïØÛøÿÿÿÿ
-|squid:UselessImportCheck"SRemove this unused import 'org.springframework.beans.factory.annotation.Qualifier'.(íàÄ®ýÿÿÿÿ
-O
-squid:S106"9Replace this use of System.out or System.err by a logger.(½˜§ß
